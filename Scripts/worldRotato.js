@@ -35,7 +35,7 @@ $(document).ready(function () {
 
     var worldXAngle = 0;
     var worldYAngle = 0;
-    var distanceFromCamera = 0;
+    var distanceFromCamera = 10;
 
 
     var numberOfObjects = 56;
@@ -78,29 +78,32 @@ $(document).ready(function () {
             'top': randomNumber(10, 90) - (cubeSize * 0.5) + '%',
             'height': cubeSize + '%',
             'width': cubeSize + '%'
-        };
-        
+        };        
 
 
+        var wAndH = 90;
+
+        for (var i = 0; i < 9 ; i++) {
 
 
-        for (var i = 0; i < 3 ; i++) {
-            
-
-
+            wAndH = wAndH - 10;
 
 
 
             var data = {
-                x: randomNumber(10, 90),
-                y: randomNumber(10, 90),
-                z: randomNumber(10, 90),
-                rotZ: randomNumber(10, 90),
+                x: randomNumber(-10, 10),
+                y: randomNumber(-10, 10),
+                z: randomNumber(-100, 100),
+                rotZ: randomNumber(-1, 90),
                 s: randomNumber(0.3, 3),
                 speed: .1 * Math.random()
             };
             
             var translate2 = {
+                
+                'width': wAndH,
+                'height' : wAndH,
+
                 'transform':
                     'translateX(' + data.x + 'px) ' +
                     'translateY(' + data.y + 'px) ' +
@@ -153,8 +156,8 @@ $(document).ready(function () {
                     'translateX( ' + $thisLayer.data('x') + 'px )' +
                     'translateY( ' + $thisLayer.data('y') + 'px ) ' +
                     'translateZ( ' + $thisLayer.data('z') + 'px ) ' +
-                    'rotateY( ' + (-1 * worldYAngle) + 'deg) ' +
-                    'rotateX( ' + (-1 * worldXAngle) + 'deg) ' +
+                    'rotateY( ' + +(-worldYAngle)  + 'deg) ' +
+                    'rotateX( ' + (-worldXAngle) + 'deg) ' +
                     'rotateZ(' + $thisLayer.data('rotZ') + 'deg)' +    
                     'scale( ' + $thisLayer.data('s') + ')'
             };
@@ -162,15 +165,15 @@ $(document).ready(function () {
             $thisLayer.css(newTranslation);
         });
 
-
+        console.log('test')
 
         requestAnimationFrame(update);
     }
 
 
     var handleMousemove = function (e) {
-        worldXAngle = -(0.5 - (e.clientX / $window.width())) * 180;
-        worldYAngle = (0.5 - (e.clientY / $window.height())) * 180;
+        worldYAngle = -(.5 - (e.clientX / window.innerWidth)) * 180;
+        worldXAngle = (.5 - (e.clientY / window.innerHeight)) * 180;
         updateView();
     };
 
