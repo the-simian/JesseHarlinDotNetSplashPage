@@ -38,8 +38,10 @@ $(document).ready(function () {
     var distanceFromCamera = 10;
 
 
-    var numberOfObjects = 56;
-    
+    var numberOfObjects = 15;
+
+    var numberOfSublayers = 5;
+
     var objectLayers = [];
     //**-------------
 
@@ -81,21 +83,22 @@ $(document).ready(function () {
         };        
 
 
-        var wAndH = 90;
+        var wAndH = randomNumber(50, 200);
+        var subtractor = randomNumber(1, 10) * numberOfSublayers;
 
-        for (var i = 0; i < 9 ; i++) {
+        for (var i = 0; i < numberOfSublayers ; i++) {
 
 
-            wAndH = wAndH - 10;
+            wAndH = wAndH - subtractor;
 
 
 
             var data = {
                 x: randomNumber(-10, 10),
                 y: randomNumber(-10, 10),
-                z: randomNumber(-100, 100),
-                rotZ: randomNumber(-1, 90),
-                s: randomNumber(0.3, 3),
+                z: randomNumber(-10, 10),
+                rotZ: randomNumber(-90, 90),
+                scale: randomNumber(0.1, 4),
                 speed: .1 * Math.random()
             };
             
@@ -105,16 +108,16 @@ $(document).ready(function () {
                 'height' : wAndH,
 
                 'transform':
-                    'translateX(' + data.x + 'px) ' +
-                    'translateY(' + data.y + 'px) ' +
-                    'translateZ(' + data.z + 'px) ' +
-                    'rotateZ(' + data.rotZ + 'deg)' +
+                    'translateX(' + data.x + ' px) ' +
+                    'translateY(' + data.y + ' px) ' +
+                    'translateZ(' + data.z + ' px) ' +
+                    'rotateZ(' + data.rotZ + ' deg)' +
                     'scale(' + data.s + ')'
             };
 
 
-            var $layerObj = $('<div class="world-object-layer"></div>').css(translate2).data(data);
-            objectLayers.push($layerObj);
+            var $layerObj = $('<div class="world-object-layer"></div>').css(translate2).data('transform',data);
+
             layers.push($layerObj);
         }
 
@@ -139,46 +142,53 @@ $(document).ready(function () {
 
        
     };
+    var counter = 0;
+    var $objectLayers;
 
     function update() {
-        
 
+        $objectLayers = $objectLayers || $('.world-object-layer');
 
-        $.each(objectLayers, function(index, element) {
+        $.each($objectLayers, function (index, element) {
             var $thisLayer = $(element);
-            var sp = $thisLayer.data('speed');
-            var rotZ = $thisLayer.data('rotZ');
 
-            $thisLayer.data('rotZ', rotZ + sp);
+            var oldData = $thisLayer.data('transform');
 
-            var newTranslation = {
-                'transform':
-                    'translateX( ' + $thisLayer.data('x') + 'px )' +
-                    'translateY( ' + $thisLayer.data('y') + 'px ) ' +
-                    'translateZ( ' + $thisLayer.data('z') + 'px ) ' +
-                    'rotateY( ' + +(-worldYAngle)  + 'deg) ' +
-                    'rotateX( ' + (-worldXAngle) + 'deg) ' +
-                    'rotateZ(' + $thisLayer.data('rotZ') + 'deg)' +    
-                    'scale( ' + $thisLayer.data('s') + ')'
+            var newData = {
+                x: oldData.x,
+                y: oldData.y,
+                z: oldData.z,
+                rotY: -worldYAngle,
+                rotX: -worldXAngle,
+                
+                rotZ: oldData.rotZ,
+                scale: oldData.scale
             };
 
-            $thisLayer.css(newTranslation);
+            $thisLayer.css({
+                'transform': 'rotateX( ' + newData.rotX + 'deg) rotateY( ' + newData.rotY + 'deg) '
+            }).data('transform', newData);
+            
+            counter++;
         });
 
-        console.log('test')
+        
 
         requestAnimationFrame(update);
     }
 
 
     var handleMousemove = function (e) {
-        worldYAngle = -(.5 - (e.clientX / window.innerWidth)) * 180;
-        worldXAngle = (.5 - (e.clientY / window.innerHeight)) * 180;
+        worldYAngle = Math.floor(-(0.5 - (e.clientX / window.innerWidth)) * 180);
+        worldXAngle = Math.floor((0.5 - (e.clientY / window.innerHeight)) * 180);
         updateView();
     };
 
 
     generateWorldObjects();
+
+    $objectLayers = $('.world-object-layer');
+
     update();
     $window.on('mousemove', handleMousemove);
 

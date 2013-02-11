@@ -31,7 +31,7 @@ h1
 	position: absolute;
 	top: 50%;
 	transform-style: preserve-3d;
-	
+	-webkit-transform-style: preserve-3d;
     
 
     
@@ -40,25 +40,35 @@ h1
 
 .world-object {
     height: 20px;
-    margin-left: -10px;
-    margin-top: -10px;
-    position: absolute;
-    top: 256px;
+	left: 256px;
+	margin-left: -10px;
+	margin-top: -10px;
+	position: absolute;
+	top: 256px;
     width: 20px;
-
+    	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
     
 }
 
 .world-object-layer {
 
-
-    display: block;
-
+	height: 256px;
+	left: 50%;
+	margin-left: -128px;
+	margin-top: -128px;
 	position: absolute;
+	top: 50%;
+	width: 256px;
+
+    background-color: rgba(181, 27, 224, 0.05);
 
     box-shadow: 3px 3px 13px 3px rgba(3, 3, 3, 0.1);
     -webkit-box-shadow: 3px 3px 13px 3px rgba(3, 3, 3, 0.1);
 
     border-top: 1px solid rgba(0, 0, 0, 0.3);
     border-radius: 90px;
+
+    	transform-style: preserve-3d;
+	-webkit-transform-style: preserve-3d;
 }
