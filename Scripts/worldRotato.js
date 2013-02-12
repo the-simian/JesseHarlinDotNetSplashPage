@@ -38,7 +38,7 @@ $(document).ready(function () {
     var distanceFromCamera = 10;
 
 
-    var numberOfObjects = 15;
+    var numberOfObjects = 4;
 
     var numberOfSublayers = 5;
 
@@ -72,10 +72,10 @@ $(document).ready(function () {
     function createWorldObject() {
         var layers = [];
         
-        var cubeSize = randomNumber(5, 45);
+        var cubeSize = randomNumber(1, 2);
 
         var translate = {
-            'transform': 'translateZ(' + randomNumber(-256, 256) + 'px) rotateX(' + randomNumber(-256, 256) + 'deg) rotateY(' + randomNumber(-256, 256) + 'deg)',
+            'transform': 'translateZ(' + randomNumber(-256, 256) + 'px) translateX(' + randomNumber(-256, 256) + 'px) translateY(' + randomNumber(-256, 256) + 'px)',
             'left': randomNumber(10, 90) - (cubeSize * 0.5) + '%',
             'top': randomNumber(10, 90) - (cubeSize * 0.5) + '%',
             'height': cubeSize + '%',
@@ -93,30 +93,37 @@ $(document).ready(function () {
 
 
 
-            var data = {
+            var transData = {
                 x: randomNumber(-10, 10),
                 y: randomNumber(-10, 10),
                 z: randomNumber(-10, 10),
-                rotZ: randomNumber(-90, 90),
-                scale: randomNumber(0.1, 4),
+                rotZ: randomNumber(1, 90),
+                scale: randomNumber(0.5, 2),
                 speed: .1 * Math.random()
             };
-            
+
+            console.log(transData);
+
             var translate2 = {
                 
                 'width': wAndH,
                 'height' : wAndH,
 
-                'transform':
-                    'translateX(' + data.x + ' px) ' +
-                    'translateY(' + data.y + ' px) ' +
-                    'translateZ(' + data.z + ' px) ' +
-                    'rotateZ(' + data.rotZ + ' deg)' +
-                    'scale(' + data.s + ')'
+       
             };
 
 
-            var $layerObj = $('<div class="world-object-layer"></div>').css(translate2).data('transform',data);
+            var $layerObj = $('<div class="world-object-layer"></div>')
+                .css(translate2)
+                .css({
+                    'transform':
+                        'translateX(' + transData.x + 'px) ' +
+                        'translateY(' + transData.y + 'px) ' +
+                        'translateZ(' + transData.z + 'px) ' +
+                        'rotateZ(' + transData.rotZ + 'deg)' +
+                        'scale(' + transData.scale + ')'
+                })
+                .data('transform', transData);
 
             layers.push($layerObj);
         }
@@ -160,19 +167,28 @@ $(document).ready(function () {
                 z: oldData.z,
                 rotY: -worldYAngle,
                 rotX: -worldXAngle,
-                
                 rotZ: oldData.rotZ,
                 scale: oldData.scale
             };
 
             $thisLayer.css({
-                'transform': 'rotateX( ' + newData.rotX + 'deg) rotateY( ' + newData.rotY + 'deg) '
+
+                'transform':
+                    'rotateY( ' + newData.rotY + 'deg ) ' +
+                    'rotateX( ' + newData.rotX + 'deg ) '+
+                    
+                    'rotateZ( ' + newData.rotZ + 'deg ) ' +
+                        
+                    'translateX( ' + newData.x + 'px ) ' +
+                    'translateY( ' + newData.y + 'px ) ' +   
+                    'translateZ( ' + newData.z + 'px ) ' +
+                        
+                    'scale( '+ newData.scale+' )'
+                
             }).data('transform', newData);
             
             counter++;
         });
-
-        
 
         requestAnimationFrame(update);
     }
@@ -184,7 +200,6 @@ $(document).ready(function () {
         updateView();
     };
 
-
     generateWorldObjects();
 
     $objectLayers = $('.world-object-layer');
@@ -192,8 +207,6 @@ $(document).ready(function () {
     update();
     $window.on('mousemove', handleMousemove);
 
-
-    
 
 });
 
