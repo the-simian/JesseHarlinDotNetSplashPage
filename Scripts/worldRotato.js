@@ -38,9 +38,9 @@ $(document).ready(function () {
     var distanceFromCamera = 10;
 
 
-    var numberOfObjects = 50;
+    var numberOfObjects = 30;
 
-    var numberOfSublayers = 7;
+    var numberOfSublayers = 5;
 
     var objectLayers = [];
     //**-------------
@@ -102,7 +102,7 @@ $(document).ready(function () {
                 speed: .1 * Math.random()
             };
 
-            console.log(transData);
+            
 
             var translate2 = {
                 

@@ -58,6 +58,7 @@ ul { list-style-type: none; }
 
 .world-object {
     -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
     /*background-color: rgba(90, 54, 23, 0.2);*/
     position: absolute;
     transform-style: preserve-3d;
@@ -65,11 +66,11 @@ ul { list-style-type: none; }
 
 .world-object-layer {
     -webkit-box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.25);
-    /*background-color: rgba(255, 255, 255, 0.8);*/
+    background-color: rgba(255, 255, 255, 1);
     border-radius: 90px;
-    /*background-color: rgba(181, 27, 224, 0.05);*//*border-top: 1px solid black;*/
-    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.1);
-    /*border-left: 1px solid black;*/
+    
+    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.3);
+    
     
 
     position: absolute;
