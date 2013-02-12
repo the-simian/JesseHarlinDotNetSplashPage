@@ -1,68 +1,78 @@
-﻿body
-{
-    font-family: Calibri, Segoe UI, Helvetica;
-}
+﻿body { font-family: Calibri, Segoe UI, Helvetica; }
 
-h1
-{
-    font-style: normal;
+h1 {
     font-family: Segoe UI;
+    font-style: normal;
 }
 
-#viewport
-{
+a { text-decoration: none; }
+
+a:hover { text-decoration: none; }
+
+
+ul { list-style-type: none; }
+
+
+#viewport {
     -moz-perspective: 450;
     -ms-perspective: 450;
     -o-perspective: 450;
     -webkit-perspective: 450;
-    perspective: 450;
-    position: absolute;
-    top: 0;
-    right: 0;
+    /*background-color: rgba(134,24,67,0.4);*/
+    
     bottom: 0;
     left: 0;
-    z-index: 2;
     overflow: hidden;
-    background-color: rgba(134,24,67,0.4);
+    perspective: 450;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
 }
 
-#world
-{
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
+
+#information_splash {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.25);
+    left: 5%;
+    padding: 20px;
     position: absolute;
-    top: 50%;
-    left: 50%;
-    margin-top: -256px;
-    margin-left: -256px;
-    width: 512px;
+    top: 5%;
+    z-index: 999;
+}
+
+#world {
+    -webkit-transform-style: preserve-3d;
     height: 512px;
-    background-color: rgba(45,200,167,0.4);
-}
-
-
-.world-object
-{
-    -webkit-transform-style: preserve-3d;
-    transform-style: preserve-3d;
-    position: absolute;
-    top: 256px;
-    left: 256px;
-    margin-top: -10px;
-    margin-left: -10px;
-    width: 20px;
-    height: 20px;
-    background-color: rgba(90, 54, 23, 0.2);
-}
-
-.world-object-layer
-{
+    left: 50%;
+    margin-left: -256px;
+    margin-top: -256px;
     position: absolute;
     top: 50%;
-    left: 50%;
-    margin-top: -128px;
-    margin-left: -128px;
-    width: 256px;
-    height: 256px;
-    background-color: rgba(181, 27, 224, 0.05);
+    transform-style: preserve-3d;
+    width: 512px;
+    z-index: 1; /*background-color: rgba(45,200,167,0.4);*/
+}
+
+
+.world-object {
+    -webkit-transform-style: preserve-3d;
+    /*background-color: rgba(90, 54, 23, 0.2);*/
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+.world-object-layer {
+    -webkit-box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.25);
+    /*background-color: rgba(255, 255, 255, 0.8);*/
+    border-radius: 90px;
+    /*background-color: rgba(181, 27, 224, 0.05);*//*border-top: 1px solid black;*/
+    box-shadow: 4px 4px 14px 4px rgba(0, 0, 0, 0.1);
+    /*border-left: 1px solid black;*/
+    
+
+    position: absolute;
+    
+    
 }

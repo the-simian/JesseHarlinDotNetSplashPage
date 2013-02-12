@@ -38,9 +38,9 @@ $(document).ready(function () {
     var distanceFromCamera = 10;
 
 
-    var numberOfObjects = 4;
+    var numberOfObjects = 50;
 
-    var numberOfSublayers = 5;
+    var numberOfSublayers = 7;
 
     var objectLayers = [];
     //**-------------
@@ -98,7 +98,7 @@ $(document).ready(function () {
                 y: randomNumber(-10, 10),
                 z: randomNumber(-10, 10),
                 rotZ: randomNumber(1, 90),
-                scale: randomNumber(0.5, 2),
+                scale: randomNumber(0.3, 1),
                 speed: .1 * Math.random()
             };
 
