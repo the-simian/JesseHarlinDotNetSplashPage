@@ -38,9 +38,9 @@ $(document).ready(function () {
     var distanceFromCamera = 10;
 
 
-    var numberOfObjects = 30;
+    var numberOfObjects = 7;
 
-    var numberOfSublayers = 5;
+    var numberOfSublayers = 4;
 
     var objectLayers = [];
     //**-------------
@@ -174,16 +174,20 @@ $(document).ready(function () {
             $thisLayer.css({
 
                 'transform':
-                    'rotateY( ' + newData.rotY + 'deg ) ' +
-                    'rotateX( ' + newData.rotX + 'deg ) '+
-                    
-                    'rotateZ( ' + newData.rotZ + 'deg ) ' +
+
                         
                     'translateX( ' + newData.x + 'px ) ' +
                     'translateY( ' + newData.y + 'px ) ' +   
                     'translateZ( ' + newData.z + 'px ) ' +
                         
-                    'scale( '+ newData.scale+' )'
+
+                    'rotateY( ' + newData.rotY + 'deg ) ' +
+                    'rotateX( ' + newData.rotX + 'deg ) ' 
+
+                    //'rotateZ( ' + newData.rotZ + 'deg ) ' +
+
+                        
+                    //'scale( '+ newData.scale+' )'
                 
             }).data('transform', newData);
             
