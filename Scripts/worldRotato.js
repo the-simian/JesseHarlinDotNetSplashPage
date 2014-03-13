@@ -12,7 +12,9 @@
         window.requestAnimationFrame = function (callback, element) {
             var currTime = new Date().getTime();
             var timeToCall = Math.max(0, 16 - (currTime - lastTime));
-            var id = window.setTimeout(function () { callback(currTime + timeToCall); },
+            var id = window.setTimeout(function () {
+                    callback(currTime + timeToCall);
+                },
                 timeToCall);
             lastTime = currTime + timeToCall;
             return id;
@@ -48,7 +50,7 @@ $(document).ready(function () {
 
     function generateWorldObjects() {
         var objects = [];
-        
+
 
         $world.html('');
 
@@ -66,12 +68,12 @@ $(document).ready(function () {
     function randomNumber(min, max) {
 
 
-        return (Math.random() * (max -min)) + min;
+        return (Math.random() * (max - min)) + min;
     }
 
     function createWorldObject() {
         var layers = [];
-        
+
         var cubeSize = randomNumber(1, 2);
 
         var translate = {
@@ -80,15 +82,15 @@ $(document).ready(function () {
             'top': randomNumber(10, 90) - (cubeSize * 0.5) + '%',
             'height': cubeSize + '%',
             'width': cubeSize + '%'
-        };        
+        };
 
 
         var wAndH = randomNumber(25, 300);
         var subtractor = randomNumber(1, 10) * numberOfSublayers;
 
         var subs = Math.ceil(randomNumber(0, numberOfSublayers));
- 
-        for (var i = 0; i < subs ; i++) {
+
+        for (var i = 0; i < subs; i++) {
 
 
             wAndH = wAndH - subtractor;
@@ -101,25 +103,24 @@ $(document).ready(function () {
                 z: randomNumber(-30, 30),
                 rotZ: randomNumber(1, 90),
                 scale: randomNumber(0.3, 1),
-                speed:   Math.random() * 0.7
+                speed: Math.random() * 0.7
             };
 
-            
+
 
             var translate2 = {
-                
-                'width': wAndH,
-                'height' : wAndH,
 
-       
+                'width': wAndH,
+                'height': wAndH,
+
+
             };
 
 
             var $layerObj = $('<div class="world-object-layer"></div>')
                 .css(translate2)
                 .css({
-                    'transform':
-                        'translateX(' + transData.x + 'px) ' +
+                    'transform': 'translateX(' + transData.x + 'px) ' +
                         'translateY(' + transData.y + 'px) ' +
                         'translateZ(' + transData.z + 'px) ' +
                         'rotateZ(' + transData.rotZ + 'deg)' +
@@ -137,19 +138,19 @@ $(document).ready(function () {
 
         });
 
-        
+
         return $obj;
     }
 
 
     //**--------------
-    
+
     var updateView = function () {
         $world.css({
             'transform': 'translateZ(' + distanceFromCamera + 'px) rotateX(' + worldXAngle + 'deg) rotateY(' + worldYAngle + 'deg)'
         });
 
-       
+
     };
     var counter = 0;
     var $objectLayers;
@@ -164,34 +165,33 @@ $(document).ready(function () {
             var oldData = $thisLayer.data('transform');
 
             var newData = {
-                x: oldData.x ,
-                y: oldData.y ,
-                z: oldData.z ,
-                rotY: -worldYAngle ,
-                rotX: -worldXAngle ,
+                x: oldData.x,
+                y: oldData.y,
+                z: oldData.z,
+                rotY: -worldYAngle,
+                rotX: -worldXAngle,
                 rotZ: oldData.rotZ + oldData.speed,
                 scale: oldData.scale,
                 opacity: 1,
                 speed: oldData.speed
             };
 
-            
+
 
 
             $thisLayer.css({
-                'transform':
-                    'translateX( ' + newData.x + 'px ) ' +
-                    'translateY( ' + newData.y + 'px ) ' +   
+                'transform': 'translateX( ' + newData.x + 'px ) ' +
+                    'translateY( ' + newData.y + 'px ) ' +
                     'translateZ( ' + newData.z + 'px ) ' +
                     'rotateY( ' + newData.rotY + 'deg ) ' +
                     'rotateX( ' + newData.rotX + 'deg ) ' +
-                    'rotateZ( ' + newData.rotZ + 'deg ) ' + 
+                    'rotateZ( ' + newData.rotZ + 'deg ) ' +
                     'scale( ' + newData.scale + ' )',
-                
+
                 'opacity': newData.opacity
-                
+
             }).data('transform', newData);
-            
+
             counter++;
         });
 
@@ -214,9 +214,3 @@ $(document).ready(function () {
 
 
 });
-
-
-
-
-
-
