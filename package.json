@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "express": "5.0.0-alpha.4",
+        "express": "5.0.0-alpha.6",
         "mu2": "0.5.x",
         "optimist": ">= 0.0.1"
     }
